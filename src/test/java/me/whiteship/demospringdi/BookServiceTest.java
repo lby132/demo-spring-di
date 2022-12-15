@@ -11,6 +11,9 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import static net.bytebuddy.matcher.ElementMatchers.named;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class BookServiceTest {
 
@@ -67,4 +70,17 @@ class BookServiceTest {
         bookService.rent(book);
     }
 
+    @Test
+    void mockTest() {
+        final BookRepository bookRepositoryMock = mock(BookRepository.class);
+        final Book hibernateBook = new Book();
+        hibernateBook.setTitle("Hibernate");
+        when(bookRepositoryMock.save(any())).thenReturn(hibernateBook);
+
+        final BookService2 bookService2 = new BookService2(bookRepositoryMock);
+
+        final Book book = new Book();
+        book.setTitle("spring");
+        bookService.rent(book);
+    }
 }

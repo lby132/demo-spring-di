@@ -19,6 +19,7 @@ dependencies {
 	implementation group: 'cglib', name: 'cglib', version: '3.3.0'
 	implementation group: 'net.bytebuddy', name: 'byte-buddy', version: '1.11.21'
 
+
 }
 
 tasks.named('test') {
